@@ -1,5 +1,5 @@
 import { requestQuote } from "@/app/actions/request-quote";
-import { hero } from "@/content/site";
+import { hero, quoteCta } from "@/content/site";
 import { QuoteForm } from "./quote-form/quote-form";
 import { RidgeLine } from "./ridge-line";
 import { TrustBadges } from "./trust-badges";
@@ -21,7 +21,7 @@ export function Hero() {
           </p>
         </div>
         <div className="md:col-start-2 md:row-span-2 md:row-start-1">
-          <QuoteForm id="quote" action={requestQuote} title="Get your free quote" />
+          <QuoteForm id="quote" action={requestQuote} title={quoteCta} />
         </div>
         <TrustBadges className="md:col-start-1 md:row-start-2 md:self-start" />
       </div>

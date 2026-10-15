@@ -20,7 +20,7 @@ import {
   primaryButton,
   secondaryButton,
 } from "@/components/ui";
-import { TOWN_OPTIONS, hero, services, site } from "@/content/site";
+import { TOWN_OPTIONS, hero, quoteCta, services, site } from "@/content/site";
 import {
   BATHROOMS,
   BEDROOMS,
@@ -347,7 +347,7 @@ export function QuoteForm({ id, action, title, titleAs: Title = "h2" }: QuoteFor
               disabled={pending}
               className={`${primaryButton} w-full`}
             >
-              {pending ? "Sending…" : "Get my free quote"}
+              {pending ? "Sending…" : quoteCta}
             </button>
             <p className="text-sm">
               We&apos;ll never share your info.{" "}

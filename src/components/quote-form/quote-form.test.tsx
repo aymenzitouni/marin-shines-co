@@ -2,6 +2,7 @@ import { act, fireEvent, render, screen, waitFor, within } from "@testing-librar
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { selectService } from "@/lib/quote-events";
+import { quoteCta } from "@/content/site";
 import {
   DELIVERY_FAILED_MESSAGE,
   INVALID_MESSAGE,
@@ -45,7 +46,7 @@ async function completeStepTwo(user: User) {
 async function submitValidRequest(user: User) {
   await completeStepOne(user);
   await completeStepTwo(user);
-  await user.click(screen.getByRole("button", { name: "Get my free quote" }));
+  await user.click(screen.getByRole("button", { name: quoteCta }));
 }
 
 describe("QuoteForm motion", () => {
@@ -114,7 +115,7 @@ describe("QuoteForm step 2", () => {
   it("shows what's missing without sending", async () => {
     const { user, action } = renderForm();
     await completeStepOne(user);
-    await user.click(screen.getByRole("button", { name: "Get my free quote" }));
+    await user.click(screen.getByRole("button", { name: quoteCta }));
 
     expect(screen.getByText("Enter your name.")).toBeInTheDocument();
     expect(screen.getByText("Enter a 10-digit phone number.")).toBeInTheDocument();
@@ -134,7 +135,7 @@ describe("QuoteForm step 2", () => {
     const { user } = renderForm(action);
     await completeStepOne(user);
     await completeStepTwo(user);
-    await user.dblClick(screen.getByRole("button", { name: "Get my free quote" }));
+    await user.dblClick(screen.getByRole("button", { name: quoteCta }));
 
     await waitFor(() => expect(action).toHaveBeenCalledTimes(1));
     expect(Object.fromEntries(action.mock.calls[0][1])).toEqual({
@@ -169,7 +170,7 @@ describe("QuoteForm step 2", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(DELIVERY_FAILED_MESSAGE);
     expect(within(screen.getByRole("alert")).getByRole("link")).toHaveAttribute("href", "tel:+14155550123");
     expect(screen.getByLabelText("Name")).toHaveValue("Jane Doe");
-    expect(screen.getByRole("button", { name: "Get my free quote" })).toBeEnabled();
+    expect(screen.getByRole("button", { name: quoteCta })).toBeEnabled();
     expect(trackLeadConversion).not.toHaveBeenCalled();
   });
 
@@ -205,7 +206,7 @@ describe("QuoteForm step 2", () => {
     await submitValidRequest(user);
     expect(await screen.findByRole("alert")).toHaveTextContent(DELIVERY_FAILED_MESSAGE);
 
-    await user.click(screen.getByRole("button", { name: "Get my free quote" }));
+    await user.click(screen.getByRole("button", { name: quoteCta }));
 
     expect(await screen.findByText("Quote request sent.")).toBeInTheDocument();
     expect(action).toHaveBeenCalledTimes(2);

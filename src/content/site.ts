@@ -61,7 +61,7 @@ export const services: Service[] = [
       "Bathrooms scrubbed and sanitized",
       "Vacuuming and mopping every floor",
     ],
-    startingPrice: "From $___", // LAUNCH-BLOCKER: starting price for standard cleaning
+    startingPrice: "From $229",
   },
   {
     id: "deep",
@@ -88,7 +88,7 @@ export const services: Service[] = [
       "Walls spot-cleaned",
       "Every floor and fixture",
     ],
-    startingPrice: "From $___", // LAUNCH-BLOCKER: starting price for move-in/move-out cleaning
+    startingPrice: "From $299",
   },
   {
     id: "vacation-rental",
@@ -104,6 +104,9 @@ export const services: Service[] = [
     startingPrice: "From $___", // LAUNCH-BLOCKER: starting price for vacation rental turnovers
   },
 ];
+
+/** The label on every quote button and link. */
+export const quoteCta = "Get a Free Quote";
 
 export const hero = {
   headline: "House Cleaning in Marin County",
@@ -131,22 +134,51 @@ export const problem = {
 
 export const servicesIntro = {
   heading: "Cleaning for every kind of Marin home",
-  body: "Not sure which one you need? Pick the closest match and we'll confirm it when we send your quote.",
+  body: "Not sure which one you need? Pick the closest match and we'll confirm it before your first clean.",
 };
 
 export const howItWorks = {
   heading: "How it works",
   steps: [
-    { title: "Request your quote", body: "Tell us about your home in under a minute." },
+    { title: quoteCta, body: "Tell us about your home in under a minute." },
     { title: "Pick your date", body: "We'll confirm your price and find a time that works." },
     { title: "Relax", body: "Come home to a clean house." },
   ],
 };
 
-export const owner: { name: string; note: string; photo: Photo | null } = {
-  name: "[Owner name]", // LAUNCH-BLOCKER: your name
-  note: "Hi, I'm [Owner name]. I started Marin Shine Co. because [your reason, in two or three sentences].", // LAUNCH-BLOCKER: your note to customers
-  photo: null, // LAUNCH-BLOCKER: a real photo of you (never stock or AI)
+export type PriceRow = { bedrooms: number; prices: (number | null)[] };
+
+/** Flat rates per clean. Standard prices are for a furnished home; null means that combination isn't offered. */
+export const pricing = {
+  heading: "Simple, flat-rate pricing",
+  intro: "Find your bedrooms and bathrooms. That's your price per clean, with no hidden fees.",
+  bathCounts: [1, 2, 3, 4, 5],
+  standard: [
+    { bedrooms: 1, prices: [229, 249, null, null, null] },
+    { bedrooms: 2, prices: [249, 269, 289, null, null] },
+    { bedrooms: 3, prices: [279, 299, 319, 339, null] },
+    { bedrooms: 4, prices: [329, 349, 369, 389, 409] },
+    { bedrooms: 5, prices: [379, 399, 419, 439, 459] },
+  ] satisfies PriceRow[],
+  recurring: [
+    { label: "Weekly", discount: 15 },
+    { label: "Every 2 weeks", discount: 10 },
+    { label: "Monthly", discount: 5 },
+  ],
+  recurringNote: "No long-term contracts. Pause or change your schedule anytime.",
+  move: [
+    { size: "Up to 1,000 sq ft", price: 299 },
+    { size: "1,001–2,000 sq ft", price: 399 },
+    { size: "2,001–3,000 sq ft", price: 499 },
+    { size: "3,001–4,000 sq ft", price: 599 },
+  ],
+  moveNote: "Empty-home flat rate, by square footage.",
+  terms: [
+    "Payment by cash, check, or Zelle, due at the time of service.",
+    "Cancel or reschedule with less than 24 hours' notice: 50% of the service price.",
+    "If our team can't get in on the day: 100% of the service price.",
+  ],
+  offChart: "Bigger home, or a mix not on the chart?",
 };
 
 export type Rating = { value: number; count: number };
@@ -154,6 +186,7 @@ export type Testimonial = { quote: string; name: string; town: string };
 export type BeforeAfter = { caption: string; before: Photo; after: Photo };
 
 // Real reviews only. Each block stays hidden while it is empty.
+export const reviewsHeading = "What Marin clients say";
 export const googleRating: Rating | null = null;
 export const testimonials: Testimonial[] = [];
 export const beforeAfter: BeforeAfter[] = [];
@@ -180,7 +213,7 @@ export const faqs: Faq[] = [
   {
     question: "How is the price determined?",
     answer:
-      "It depends on your home's size, the type of cleaning, and how often you'd like us to come. Request a quote and we'll send you an exact price.",
+      "Standard cleans are a flat rate by bedrooms and bathrooms, and move-in/move-out cleans by square footage. See the pricing table. Weekly, every-2-weeks, and monthly plans save 15%, 10%, or 5% on every clean.",
   },
   {
     question: "Are you insured?",
@@ -205,7 +238,7 @@ export const faqs: Faq[] = [
 ];
 
 export const finalCta = {
-  heading: "Get your free quote",
+  heading: quoteCta,
   body: `Tell us about your home and we'll send your price. Your first clean includes ${site.offer}.`,
 };
 

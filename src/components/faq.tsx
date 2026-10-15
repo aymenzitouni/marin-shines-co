@@ -6,7 +6,7 @@ import { focusRing, sectionHeading } from "./ui";
 
 export function Faq() {
   return (
-    <section aria-labelledby="faq-heading">
+    <section id="faq" aria-labelledby="faq-heading">
       <div className="mx-auto max-w-3xl px-4 py-16 md:px-8 md:py-24">
         <h2 id="faq-heading" className={sectionHeading}>
           Questions, answered

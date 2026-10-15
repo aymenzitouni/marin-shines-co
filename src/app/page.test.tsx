@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { hero, site } from "@/content/site";
+import { hero, quoteCta, site } from "@/content/site";
 import Home from "./page";
 
 describe("Home page", () => {
@@ -16,10 +16,35 @@ describe("Home page", () => {
     expect(screen.getByRole("heading", { level: 3, name: "Tell us about your home" })).toBeInTheDocument();
   });
 
-  it("opens with the hero quote form and has no navigation", () => {
+  it("opens with the hero quote form", () => {
     const { container } = render(<Home />);
     expect(container.querySelector("#quote[data-quote-form]")).not.toBeNull();
-    expect(container.querySelector("nav")).toBeNull();
+  });
+
+  it("has a navbar whose links all land on a section of this page", () => {
+    const { container } = render(<Home />);
+    const nav = screen.getByRole("navigation", { name: "Main" });
+    const links = within(nav).getAllByRole("link");
+    expect(links.map((link) => link.textContent)).toEqual(["Services", "Pricing", "How it works", "FAQ", "Areas"]);
+    for (const link of links) {
+      const href = link.getAttribute("href") ?? "";
+      expect(href).toMatch(/^#/);
+      expect(container.querySelector(href)).not.toBeNull();
+    }
+  });
+
+  it("has no meet-the-owner section", () => {
+    render(<Home />);
+    expect(screen.queryByRole("heading", { name: /meet the owner/i })).toBeNull();
+  });
+
+  it("calls every quote CTA 'Get a Free Quote' and never 'my' or 'your' quote", () => {
+    const { container } = render(<Home />);
+    for (const link of Array.from(container.querySelectorAll('[data-cta="quote"]'))) {
+      expect(link.textContent).toMatch(new RegExp(`^${quoteCta}`));
+    }
+    expect(screen.getAllByRole("button", { name: quoteCta, hidden: true })).toHaveLength(2);
+    expect(container.textContent).not.toMatch(/\b(my|your)( free)? quote\b/i);
   });
 
   it("points every quote CTA at the hero form and every phone link at one number", () => {

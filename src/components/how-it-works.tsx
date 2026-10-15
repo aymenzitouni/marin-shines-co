@@ -1,10 +1,10 @@
-import { howItWorks } from "@/content/site";
+import { howItWorks, quoteCta } from "@/content/site";
 import { QuoteLink } from "./quote-link";
 import { primaryButton, sectionHeading, sectionInner } from "./ui";
 
 export function HowItWorks() {
   return (
-    <section aria-labelledby="how-heading">
+    <section id="how-it-works" aria-labelledby="how-heading">
       <div className={sectionInner}>
         <h2 id="how-heading" className={sectionHeading}>
           {howItWorks.heading}
@@ -25,7 +25,7 @@ export function HowItWorks() {
             </li>
           ))}
         </ol>
-        <QuoteLink className={`${primaryButton} mt-10`}>Get my free quote</QuoteLink>
+        <QuoteLink className={`${primaryButton} mt-10`}>{quoteCta}</QuoteLink>
       </div>
     </section>
   );

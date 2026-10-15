@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { quoteCta } from "@/content/site";
 import { PhoneIcon } from "./icons";
 import { PhoneLink } from "./phone-link";
 import { QuoteLink } from "./quote-link";
@@ -34,7 +35,7 @@ export function StickyCta() {
       inert={!visible}
       className={`fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-canopy/15 bg-paper p-3 md:hidden motion-safe:transition-transform ${visible ? "translate-y-0" : "translate-y-full"}`}
     >
-      <QuoteLink className={`${primaryButton} flex-1`}>Get my free quote</QuoteLink>
+      <QuoteLink className={`${primaryButton} flex-1`}>{quoteCta}</QuoteLink>
       <PhoneLink className={secondaryButton}>
         <PhoneIcon className="size-5" />
         Call

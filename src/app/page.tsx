@@ -2,6 +2,7 @@ import { Faq } from "@/components/faq";
 import { FinalCta } from "@/components/final-cta";
 import { Hero } from "@/components/hero";
 import { HowItWorks } from "@/components/how-it-works";
+import { Pricing } from "@/components/pricing";
 import { Problem } from "@/components/problem";
 import { Proof } from "@/components/proof";
 import { ServiceArea } from "@/components/service-area";
@@ -23,6 +24,7 @@ export default function Home() {
         <Hero />
         <Problem />
         <Services />
+        <Pricing />
         <HowItWorks />
         <Proof />
         <Faq />

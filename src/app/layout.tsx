@@ -26,7 +26,7 @@ const googleAdsId = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${bitter.variable} ${atkinson.variable} h-full antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${bitter.variable} ${atkinson.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">
         {children}
         {googleAdsId ? (

@@ -1,4 +1,4 @@
-import { hero, services, servicesIntro } from "@/content/site";
+import { hero, quoteCta, services, servicesIntro } from "@/content/site";
 import { CheckIcon } from "./icons";
 import { QuoteLink } from "./quote-link";
 import { primaryButton, sectionHeading, sectionInner } from "./ui";
@@ -6,7 +6,7 @@ import { primaryButton, sectionHeading, sectionInner } from "./ui";
 /** Laid out as a price list (rows and rules), not a grid of cards. */
 export function Services() {
   return (
-    <section aria-labelledby="services-heading" className="bg-paper">
+    <section id="services" aria-labelledby="services-heading" className="bg-paper">
       <div className={sectionInner}>
         <h2 id="services-heading" className={`${sectionHeading} max-w-[22ch]`}>
           {servicesIntro.heading}
@@ -34,7 +34,8 @@ export function Services() {
                 </ul>
               </div>
               <QuoteLink service={service.id} className={`${primaryButton} w-full md:w-auto md:self-center`}>
-                Get a quote<span className="sr-only"> for {service.name.toLowerCase()}</span>
+                {quoteCta}
+                <span className="sr-only"> for {service.name.toLowerCase()}</span>
               </QuoteLink>
             </li>
           ))}

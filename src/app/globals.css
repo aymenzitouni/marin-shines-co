@@ -44,3 +44,22 @@ body {
     scroll-padding-bottom: 6rem;
   }
 }
+
+/* From md up the header is sticky: keep navbar targets clear of it (two rows below lg, one above). */
+@media (min-width: 48rem) {
+  html {
+    scroll-padding-top: 8rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  html {
+    scroll-padding-top: 5.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}

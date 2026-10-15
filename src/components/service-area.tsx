@@ -3,7 +3,7 @@ import { sectionHeading, sectionInner } from "./ui";
 
 export function ServiceArea() {
   return (
-    <section aria-labelledby="area-heading">
+    <section id="service-area" aria-labelledby="area-heading">
       <div className={`${sectionInner} grid gap-10 md:grid-cols-2 md:items-center`}>
         <div>
           <h2 id="area-heading" className={sectionHeading}>
